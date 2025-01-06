@@ -1,14 +1,14 @@
 from django.shortcuts import render
 
 def register_view(request):
-    return render(request, 'register.html', {'message': 'register'})
+    return render(request, 'register.html')
 
 def login_view(request):
-    return render(request, 'login.html', {'message': 'login'})
+    return render(request, 'login.html')
 
 def home_view(request):
-    return render(request, 'home.html', {'message': 'home'})
+    return render(request, 'home.html')
 
 def profile_view(request):
-    return render(request, 'profile.html', {'message': 'profile'})
+    return render(request, 'profile.html')
 

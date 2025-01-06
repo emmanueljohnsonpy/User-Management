@@ -1,11 +1,122 @@
-<!-- users/templates/hello.html -->
+<!-- users/templates/admin_home.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>admin home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Home</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        .search-bar {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .search-bar input[type="text"] {
+            width: 60%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .search-bar button {
+            padding: 10px;
+            background-color: #5cb85c;
+            border: none;
+            border-radius: 4px;
+            color: white;
+            cursor: pointer;
+        }
+        .search-bar button:hover {
+            background-color: #4cae4c;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+        .action-buttons a {
+            padding: 5px 10px;
+            color: white;
+            background-color: #337ab7;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+        .action-buttons a.edit {
+            background-color: #f0ad4e;
+        }
+        .action-buttons a.delete {
+            background-color: #d9534f;
+        }
+        .message {
+            text-align: center;
+            color: red;
+            margin-top: 15px;
+        }
+    </style>
 </head>
 <body>
-    <h1>{{ message }}</h1>
+    <div class="container">
+        <h2>Admin Dashboard - User Management</h2>
+        
+        <!-- Search Bar -->
+        <div class="search-bar">
+            <input type="text" id="search-user" placeholder="Search users..." name="search">
+            <button type="submit">Search</button>
+        </div>
+        
+        <!-- Users Table -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.is_active|yesno:"Active,Inactive" }}</td>
+                    <td class="action-buttons">
+                        <a href="{% url 'edit_user' user.id %}" class="edit">Edit</a>
+                        <a href="{% url 'delete_user' user.id %}" class="delete">Delete</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="4">No users found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- Message Display -->
+        {% if message %}
+            <div class="message">{{ message }}</div>
+        {% endif %}
+    </div>
 </body>
 </html>

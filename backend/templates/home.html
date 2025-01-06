@@ -1,11 +1,51 @@
-<!-- users/templates/hello.html -->
+<!-- users/templates/home.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            justify-content: center;
+        }
+        h1 {
+            color: #333;
+        }
+        .nav-links {
+            margin-top: 20px;
+        }
+        .nav-links a {
+            color: #5cb85c;
+            text-decoration: none;
+            font-size: 18px;
+            margin: 0 10px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .nav-links a:hover {
+            background-color: #4cae4c;
+            color: white;
+        }
+    </style>
 </head>
 <body>
-    <h1>{{ message }}</h1>
+    <h1>Welcome to the Home Page!</h1>
+    <div class="nav-links">
+        <a href="{% url 'profile' %}">Go to Profile</a>
+    </div>
+    
+    {% if message %}
+        <div class="message">{{ message }}</div>
+    {% endif %}
 </body>
 </html>
+
