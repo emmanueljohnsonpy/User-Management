@@ -1,4 +1,3 @@
-<!-- users/templates/home.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,28 +23,47 @@
             margin-top: 20px;
         }
         .nav-links a {
-            color: #5cb85c;
             text-decoration: none;
             font-size: 18px;
             margin: 0 10px;
             padding: 10px;
             border-radius: 5px;
+            display: inline-block;
         }
-        .nav-links a:hover {
-            background-color: #4cae4c;
+        .nav-links .profile {
+            background-color: #5cb85c;
             color: white;
+        }
+        .nav-links .profile:hover {
+            background-color: #4cae4c;
+        }
+        .nav-links .logout {
+            background-color: #d9534f;
+            color: white;
+        }
+        .nav-links .logout:hover {
+            background-color: #c9302c;
+        }
+        .message {
+            margin-top: 20px;
+            color: #ff5722;
+            font-size: 16px;
         }
     </style>
 </head>
 <body>
     <h1>Welcome to the Home Page!</h1>
     <div class="nav-links">
-        <a href="{% url 'profile' %}">Go to Profile</a>
+        <a href="{% url 'profile' %}" class="profile">Go to Profile</a>
+        <a href="{% url 'logout' %}" class="logout">Logout</a>
     </div>
     
-    {% if message %}
-        <div class="message">{{ message }}</div>
-    {% endif %}
+    {% if messages %}
+            <div class="message">
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
 </body>
 </html>
-
